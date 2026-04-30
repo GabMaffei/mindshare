@@ -12,7 +12,10 @@ export class AuthService {
             }
         })
 
-        if(!existingUser) throw new Error("Invalid credentials")
+        // VERIFICAÇÃO ADICIONADA AQUI: Checamos se o usuário existe E se ele tem uma senha
+        if(!existingUser || !existingUser.password) {
+            throw new Error("Invalid credentials")
+        }
 
         const compare = await comparePassword(data.password, existingUser.password)
 
