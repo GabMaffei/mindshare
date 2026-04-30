@@ -9,6 +9,8 @@ import { UserModel } from "../models/user.model";
 import { UserService } from "../services/user.service";
 import { CommentModel } from "../models/comment.model";
 import { CommentService } from "../services/comment.service";
+import { VoteService } from "../services/vote.service";
+import { VoteModel } from "../models/vote.model";
 
 @Resolver(() => IdeaModel)
 @UseMiddleware(IsAuth)
@@ -16,6 +18,7 @@ export class IdeaResolver {
   private ideaService = new IdeaService()
   private userService = new UserService()
   private commentService = new CommentService()
+  private voteService = new VoteService()
 
   @Mutation(() => IdeaModel)
   async createIdea(
@@ -54,5 +57,10 @@ export class IdeaResolver {
   @FieldResolver(() => [CommentModel])
   async comments(@Root() idea: IdeaModel): Promise<CommentModel[] | null> {
     return this.commentService.listCommentsByIdea(idea.id)
+  }
+
+  @FieldResolver(() => [VoteModel])
+  async votes(@Root() idea: IdeaModel): Promise<VoteModel[] | null> {
+    return this.voteService.listVotesByIdea(idea.id)
   }
 }

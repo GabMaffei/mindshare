@@ -16,9 +16,9 @@ export class VoteModel {
     @Field(() => GraphQLISODateTime)
     createdAt!: Date
 
-    @Field(() => UserModel)
-    user!: UserModel
+    @Field(() => UserModel, { nullable: true })
+    user?: UserModel
 
-    @Field(() => IdeaModel)
-    idea!: IdeaModel
+    @Field(() => IdeaModel, { nullable: true })
+    idea?: IdeaModel
 }
