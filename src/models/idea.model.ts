@@ -17,6 +17,9 @@ export class IdeaModel {
   @Field(() => String)
   authorId!: string;
 
+  @Field(() => Number, { nullable: true })
+  countVotes?: number | null;
+
   @Field(() => UserModel, { nullable: true })
   author?: UserModel | null;
 

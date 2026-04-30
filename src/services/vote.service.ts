@@ -31,9 +31,15 @@ export class VoteService {
     return true;
   }
 
-    async listVotesByIdea(ideaId: string) {
-        return prismaClient.vote.findMany({
-            where: { ideaId }
-        })
-    }
+  async listVotesByIdea(ideaId: string) {
+    return prismaClient.vote.findMany({
+      where: { ideaId },
+    });
+  }
+
+  async countVotes(ideaId: string) {
+    return prismaClient.vote.count({
+      where: { ideaId },
+    });
+  }
 }

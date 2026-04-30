@@ -63,4 +63,9 @@ export class IdeaResolver {
   async votes(@Root() idea: IdeaModel): Promise<VoteModel[] | null> {
     return this.voteService.listVotesByIdea(idea.id)
   }
+
+  @FieldResolver(() => Number)
+  async countVotes(@Root() idea: IdeaModel): Promise<number | null> {
+    return this.voteService.countVotes(idea.id)
+  }
 }

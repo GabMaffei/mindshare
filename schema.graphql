@@ -37,6 +37,7 @@ type IdeaModel {
   author: UserModel
   authorId: String!
   comments: [CommentModel!]
+  countVotes: Float
   createdAt: DateTimeISO!
   description: String
   id: ID!
