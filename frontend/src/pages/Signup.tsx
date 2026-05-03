@@ -11,8 +11,8 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import logo from "@/assets/logo.svg"
 import { Link } from "react-router-dom"
-// import { useAuthStore } from "@/stores/auth"
-// import { toast } from "sonner"
+import { useAuthStore } from "@/stores/auth"
+import { toast } from "sonner"
 
 export function Signup() {
   const [name, setName] = useState("")
@@ -20,26 +20,27 @@ export function Signup() {
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
 
-//   const signup = useAuthStore((state) => state.signup)
+  const signup = useAuthStore((state) => state.signup)
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault()
     setLoading(true)
 
-    // try {
-    //   const signupMutate = await signup({
-    //     name,
-    //     email,
-    //     password,
-    //   })
-    //   if (signupMutate) {
-    //     toast.success("Cadastro realizado com sucesso!")
-    //   }
-    // } catch (error: any) {
-    //   toast.error("Erro ao realizar o cadastro")
-    // } finally {
-    //   setLoading(false)
-    // }
+    try {
+      const signupMutate = await signup({
+        name,
+        email,
+        password,
+      })
+      if (signupMutate) {
+        toast.success("Cadastro realizado com sucesso!")
+      }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error: unknown) {
+      toast.error("Erro ao realizar o cadastro")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
