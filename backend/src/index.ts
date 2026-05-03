@@ -10,9 +10,15 @@ import { buildContext } from './graphql/context'
 import { IdeaResolver } from './resolvers/idea.resolver'
 import { CommentResolver } from './resolvers/comment.resolver'
 import { VoteResolver } from './resolvers/vote.resolver'
+import cors from 'cors' // 👈 1. Importe o cors
 
 async function bootstrap() {
     const app = express()
+
+    app.use(cors({
+        origin: 'http://localhost:5173',
+        credentials: true
+    })) 
 
     const schema = await buildSchema({
         resolvers: [AuthResolver, UserResolver, IdeaResolver, CommentResolver, VoteResolver],
