@@ -39,7 +39,7 @@ export function CreateIdeaDialog({
     },
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.SubmitEvent) => {
     e.preventDefault()
     createIdea({
       variables: {
