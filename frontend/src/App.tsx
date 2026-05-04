@@ -4,8 +4,8 @@ import { Login } from '@/pages/Auth/Login'
 import { Signup } from '@/pages/Auth/Signup'
 import { IdeasPage } from '@/pages/Ideias'
 import { useAuthStore } from './stores/auth'
+import { Members } from './pages/Members'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuthStore()
   return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />
@@ -17,24 +17,32 @@ function PublicRoute({ children }: { children: React.ReactNode }) {
 }
 
 function App() {
-
   return (
     <Layout>
       <Routes>
         <Route path="/login" element={
           <PublicRoute>
             <Login />
-          </PublicRoute>} />
-
+          </PublicRoute>
+        } />
+        
         <Route path="/signup" element={
           <PublicRoute>
             <Signup />
-          </PublicRoute>} />
+          </PublicRoute>
+        } />
 
-        <Route path="/ideas" element={
+        <Route path="/" element={
           <ProtectedRoute>
             <IdeasPage />
-          </ProtectedRoute>} />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/members" element={
+          <ProtectedRoute>
+            <Members />
+          </ProtectedRoute>
+        } />
       </Routes>
     </Layout>
   )
