@@ -66,3 +66,19 @@ frontend/   React application
 ## Learning context
 
 Mindshare was the hands-on application in the program's Back-end GraphQL module. The module covered GraphQL modeling, authentication, ideas, comments, votes, and querying related data. This repository is an educational implementation, not a claim of production use.
+
+## Source guide
+
+| Source | What to inspect |
+| --- | --- |
+| [Data model](backend/prisma/schema.prisma) | Users, ideas, comments, votes, and database constraints. |
+| [Idea resolver](backend/src/resolvers/idea.resolver.ts) | GraphQL entry points for idea operations. |
+| [Vote service](backend/src/services/vote.service.ts) | Vote creation/removal behavior. |
+| [Authentication middleware](backend/src/middlewares/auth.middleware.ts) | JWT checks on protected operations. |
+| [Frontend API client](frontend/src/lib/graphql/apollo.ts) | GraphQL endpoint and request context. |
+
+## Review the application flow
+
+Start with the Prisma model, follow a resolver into its service, and then inspect the React GraphQL client. A useful local walkthrough is to create an account, add an idea, comment on it, and toggle a vote. The database's unique user/idea vote constraint is distinct from the UI's vote-toggle behavior.
+
+Roles represented in the model should not be read as a complete authorization policy. This project demonstrates GraphQL application flows and authentication; it is not an AI application.
